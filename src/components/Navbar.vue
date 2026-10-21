@@ -29,85 +29,80 @@ const navLinks = [
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#070D19]/90 border-b border-slate-800/80 transition-all">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-black/10 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 sm:h-20">
         
-        <!-- Brand Logo - Left -->
+        <!-- Logo -->
         <a href="#" class="flex items-center gap-3 group">
-          <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-slate-900 border border-cyan-500/30 group-hover:border-cyan-400 transition-all">
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 text-cyan-400" viewBox="0 0 100 100" fill="none">
-              <ellipse cx="50" cy="50" rx="40" ry="22" stroke="#00D2FF" stroke-width="4" stroke-dasharray="5 3" transform="rotate(-25 50 50)"/>
-              <ellipse cx="50" cy="50" rx="42" ry="16" stroke="#10B981" stroke-width="3" transform="rotate(35 50 50)"/>
-              <circle cx="50" cy="50" r="28" fill="#0A1628" stroke="#00D2FF" stroke-width="3"/>
-              <text x="50" y="55" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">CTM</text>
-            </svg>
+          <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-lg bg-black text-white font-extrabold text-sm tracking-wider shadow-sm">
+            <span>CTM</span>
           </div>
           <div class="flex flex-col">
-            <div class="flex items-center gap-1.5">
-              <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white font-['Space_Grotesk']">CENTRAL TRACK</span>
-              <span class="px-1.5 py-0.5 text-[9px] font-bold bg-cyan-500 text-slate-950 rounded uppercase">MALI</span>
+            <div class="flex items-center gap-2">
+              <span class="text-lg sm:text-xl font-black tracking-tight text-black">CENTRAL TRACK</span>
+              <span class="px-1.5 py-0.5 text-[9px] font-bold bg-black text-white rounded uppercase">MALI</span>
             </div>
-            <span class="text-[10px] text-slate-400 font-medium hidden sm:inline">Tracking & Sécurité GPS</span>
+            <span class="text-[11px] text-neutral-600 font-medium hidden sm:inline">Tracking & Sécurité GPS Professionnelle</span>
           </div>
         </a>
 
-        <!-- Desktop Navigation Links - Centered/Spread cleanly -->
+        <!-- Liens Bureau -->
         <nav class="hidden md:flex items-center gap-1 lg:gap-2">
           <a 
             v-for="link in navLinks" 
             :key="link.name" 
             :href="link.href" 
-            class="px-3 py-1.5 text-xs lg:text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/40 rounded-lg transition-colors"
+            class="px-3.5 py-2 text-sm font-semibold text-neutral-700 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors"
           >
             {{ link.name }}
           </a>
         </nav>
 
-        <!-- Right Quick Actions -->
-        <div class="hidden md:flex items-center gap-4">
+        <!-- Actions Droite -->
+        <div class="hidden md:flex items-center gap-5">
           <a 
             :href="companyInfo.phones[0].link" 
-            class="text-xs font-semibold text-slate-300 hover:text-cyan-400 flex items-center gap-1.5 transition-colors"
+            class="text-sm font-bold text-black hover:underline flex items-center gap-2 transition-all"
           >
-            <Phone class="w-3.5 h-3.5 text-cyan-400" />
+            <Phone class="w-4 h-4 text-black" />
             <span>76 12 50 26</span>
           </a>
 
           <button 
             @click="onOpenQuote"
-            class="px-4 py-2 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-md shadow-cyan-500/20 cursor-pointer flex items-center gap-1.5"
+            class="px-5 py-2.5 rounded-lg bg-black hover:bg-neutral-800 text-white font-bold text-sm transition-all shadow cursor-pointer flex items-center gap-1.5"
           >
             <span>Demander un devis</span>
-            <ChevronRight class="w-3.5 h-3.5" />
+            <ChevronRight class="w-4 h-4" />
           </button>
         </div>
 
-        <!-- Mobile Menu Toggle Button -->
+        <!-- Menu Mobile -->
         <div class="flex md:hidden items-center gap-2">
           <button 
             @click="onOpenQuote" 
-            class="px-3 py-1.5 rounded-lg bg-cyan-400 text-slate-950 text-xs font-bold"
+            class="px-3 py-1.5 rounded-lg bg-black text-white text-xs font-bold"
           >
             Devis
           </button>
           <button 
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            class="p-2 rounded-lg text-black hover:bg-neutral-100 transition-colors"
             aria-label="Ouvrir le menu"
           >
-            <Menu v-if="!isMobileMenuOpen" class="w-5 h-5" />
-            <X v-else class="w-5 h-5 text-cyan-400" />
+            <Menu v-if="!isMobileMenuOpen" class="w-6 h-6" />
+            <X v-else class="w-6 h-6 text-black" />
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- Mobile Drawer -->
+    <!-- Tiroir Mobile -->
     <div 
       v-if="isMobileMenuOpen" 
-      class="md:hidden border-t border-slate-800 bg-[#070D19]/98 px-5 py-5 space-y-3"
+      class="md:hidden border-t border-neutral-200 bg-white px-5 py-5 space-y-3"
     >
       <div class="grid grid-cols-1 gap-1">
         <a 
@@ -115,24 +110,24 @@ const navLinks = [
           :key="link.name" 
           :href="link.href" 
           @click="isMobileMenuOpen = false"
-          class="px-3 py-2.5 text-sm font-medium text-slate-200 hover:text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors"
+          class="px-3 py-2.5 text-sm font-bold text-neutral-800 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors"
         >
           {{ link.name }}
         </a>
       </div>
 
-      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+      <div class="pt-3 border-t border-neutral-200 flex flex-col gap-2">
         <a 
           :href="companyInfo.phones[0].link"
-          class="py-2.5 px-3 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-200 flex items-center gap-2"
+          class="py-2.5 px-3 rounded-lg bg-neutral-100 text-sm font-bold text-black flex items-center gap-2"
         >
-          <Phone class="w-4 h-4 text-cyan-400" />
+          <Phone class="w-4 h-4 text-black" />
           <span>Appeler le {{ companyInfo.phones[0].display }}</span>
         </a>
         <a 
           :href="`https://wa.me/${companyInfo.whatsappNumber}`"
           target="_blank"
-          class="py-2.5 px-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-400 font-semibold flex items-center gap-2"
+          class="py-2.5 px-3 rounded-lg bg-black text-white text-sm font-bold flex items-center gap-2"
         >
           <MessageSquare class="w-4 h-4" />
           <span>WhatsApp (+223 76 12 50 26)</span>

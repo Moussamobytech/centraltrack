@@ -32,91 +32,86 @@ const getSectorIcon = (iconName) => {
 </script>
 
 <template>
-  <section id="secteurs" class="py-20 bg-[#070D19] relative">
+  <section id="secteurs" class="py-20 bg-white border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Section Header : Left-aligned 2-column layout -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-800/80 pb-6 text-left">
+      <!-- En-tête -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-black/10 pb-6 text-left">
         <div class="space-y-3 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-400">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 border border-neutral-300 text-xs font-bold text-black">
             <Shield class="w-3.5 h-3.5" />
             <span>SECTEURS D'ACTIVITÉ</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight">
             Des configurations sur-mesure pour chaque métier
           </h2>
         </div>
-        <p class="text-slate-400 text-xs sm:text-sm max-w-md">
-          Transport lourd, missions humanitaires, véhicules commerciaux ou engins de chantier : CTM adapte le matériel à vos exigences opérationnelles.
+        <p class="text-neutral-700 text-sm font-medium max-w-md">
+          Transport lourd, missions humanitaires, véhicules commerciaux ou engins de chantier : CTM adapte le matériel à vos exigences.
         </p>
       </div>
 
-      <!-- Sector Selector Tabs (Mobile & Desktop) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+      <!-- Onglets des secteurs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 mb-10">
         <button
           v-for="(sector, idx) in targetSectors"
           :key="sector.name"
           @click="activeSectorIndex = idx"
-          class="p-4 rounded-2xl text-left border transition-all cursor-pointer flex flex-col gap-2 group"
+          class="p-5 rounded-2xl text-left border-2 transition-all cursor-pointer flex flex-col gap-3 group"
           :class="activeSectorIndex === idx 
-            ? 'bg-gradient-to-br from-cyan-950/80 to-slate-900 border-cyan-400 shadow-glow-cyan/20' 
-            : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'"
+            ? 'bg-black border-black text-white shadow-md' 
+            : 'bg-white border-neutral-200 text-black hover:border-black'"
         >
           <div class="flex items-center justify-between">
             <component 
               :is="getSectorIcon(sector.icon)" 
               class="w-6 h-6 transition-colors"
-              :class="activeSectorIndex === idx ? 'text-cyan-400' : 'text-slate-400 group-hover:text-cyan-300'"
+              :class="activeSectorIndex === idx ? 'text-white' : 'text-black'"
             />
             <span 
-              class="w-2 h-2 rounded-full"
-              :class="activeSectorIndex === idx ? 'bg-cyan-400' : 'bg-transparent'"
+              class="w-2.5 h-2.5 rounded-full"
+              :class="activeSectorIndex === idx ? 'bg-white' : 'bg-neutral-300'"
             ></span>
           </div>
-          <span 
-            class="font-bold text-sm sm:text-base transition-colors"
-            :class="activeSectorIndex === idx ? 'text-white' : 'text-slate-300'"
-          >
+          <span class="font-black text-sm sm:text-base">
             {{ sector.name }}
           </span>
         </button>
       </div>
 
-      <!-- Active Sector Showcase Card -->
-      <div class="rounded-3xl border border-slate-800 bg-gradient-to-br from-[#0B1526] to-[#080E1C] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+      <!-- Carte du secteur actif -->
+      <div class="rounded-3xl border-2 border-black bg-neutral-50 p-8 md:p-12 relative overflow-hidden shadow-sm">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          <div class="lg:col-span-7 space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-semibold">
+          <div class="lg:col-span-7 space-y-6 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-xs font-bold">
               Solution Spécifique CTM
             </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+            <h3 class="text-2xl sm:text-3xl font-black text-black">
               {{ targetSectors[activeSectorIndex].name }}
             </h3>
-            <p class="text-slate-300 text-base leading-relaxed">
+            <p class="text-neutral-700 text-base font-medium leading-relaxed">
               {{ targetSectors[activeSectorIndex].desc }}
             </p>
 
-            <!-- Key Benefits Checklist -->
+            <!-- Liste des bénéfices -->
             <div class="space-y-3 pt-2">
-              <span class="text-xs uppercase font-semibold text-slate-400 tracking-wider">Avantages concrets constatés sur le terrain :</span>
+              <span class="text-xs uppercase font-black text-black tracking-wider block">Avantages constatés sur le terrain :</span>
               <div 
                 v-for="(benefit, bIndex) in targetSectors[activeSectorIndex].benefits"
                 :key="bIndex"
-                class="flex items-start gap-3 text-slate-200 text-sm sm:text-base"
+                class="flex items-start gap-3 text-neutral-900 text-sm sm:text-base font-semibold"
               >
-                <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle class="w-4 h-4" />
-                </div>
+                <CheckCircle class="w-5 h-5 text-black shrink-0 mt-0.5" />
                 <span>{{ benefit }}</span>
               </div>
             </div>
 
             <!-- CTA -->
-            <div class="pt-4 flex flex-wrap gap-4">
+            <div class="pt-4">
               <button 
                 @click="onOpenQuote"
-                class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-bold text-sm flex items-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/20 hover:scale-[1.02] transition-transform"
+                class="px-7 py-3.5 rounded-xl bg-black hover:bg-neutral-800 text-white font-black text-sm flex items-center gap-2 cursor-pointer shadow transition-all"
               >
                 <span>Demander une étude pour {{ targetSectors[activeSectorIndex].name }}</span>
                 <ArrowRight class="w-4 h-4" />
@@ -124,23 +119,21 @@ const getSectorIcon = (iconName) => {
             </div>
           </div>
 
-          <!-- Right Showcase Feature Box -->
-          <div class="lg:col-span-5 bg-slate-900/80 rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h4 class="text-sm font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
-              <span>Équipements recommandés par CTM</span>
-            </h4>
-            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
-              <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span class="font-bold text-white block">Balise GPS Industrielle IP67</span>
-                <span class="text-slate-400 text-xs">Étanche, anti-poussière, batterie interne de secours longue autonomie.</span>
+          <!-- Encadré des équipements recommandés -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-6 border-2 border-black space-y-4 shadow-sm text-left">
+            <h4 class="text-xs font-black text-black uppercase tracking-wider">Équipements recommandés par CTM</h4>
+            <div class="space-y-3 text-xs sm:text-sm">
+              <div class="p-3.5 rounded-xl bg-neutral-100 border border-neutral-300">
+                <span class="font-black text-black block mb-0.5">Balise GPS Industrielle IP67</span>
+                <span class="text-neutral-700 font-medium">Étanche, anti-poussière, batterie interne de secours longue autonomie.</span>
               </div>
-              <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span class="font-bold text-white block">Sonde Carburant Capacitive Haute Précision</span>
-                <span class="text-slate-400 text-xs">Mesure au litre près avec alertes siphonnage instantanées par SMS.</span>
+              <div class="p-3.5 rounded-xl bg-neutral-100 border border-neutral-300">
+                <span class="font-black text-black block mb-0.5">Sonde Carburant Capacitive Haute Précision</span>
+                <span class="text-neutral-700 font-medium">Mesure au litre près avec alertes siphonnage instantanées par SMS.</span>
               </div>
-              <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                <span class="font-bold text-white block">Relais Coupe-Moteur Normalisé</span>
-                <span class="text-slate-400 text-xs">Installation propre respectant la garantie constructeur de vos véhicules.</span>
+              <div class="p-3.5 rounded-xl bg-neutral-100 border border-neutral-300">
+                <span class="font-black text-black block mb-0.5">Relais Coupe-Moteur Normalisé</span>
+                <span class="text-neutral-700 font-medium">Installation propre respectant la garantie constructeur de vos véhicules.</span>
               </div>
             </div>
           </div>

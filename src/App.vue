@@ -11,7 +11,7 @@ import Testimonials from './components/Testimonials.vue'
 import ContactQuote from './components/ContactQuote.vue'
 import Footer from './components/Footer.vue'
 import QuoteModal from './components/QuoteModal.vue'
-import { MessageSquare, Phone, MapPin } from 'lucide-vue-next'
+import { MessageSquare, Phone } from 'lucide-vue-next'
 import { companyInfo } from './data/content'
 
 const isQuoteModalOpen = ref(false)
@@ -26,68 +26,52 @@ const closeQuote = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#070D19] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
+  <div class="min-h-screen bg-white text-black flex flex-col font-sans selection:bg-black selection:text-white">
     
-    <!-- Navigation Bar -->
+    <!-- Barre de Navigation -->
     <Navbar :onOpenQuote="openQuote" />
 
-    <!-- Main Content -->
+    <!-- Contenu Principal -->
     <main class="flex-grow">
-      <!-- Hero Section -->
       <HeroSection :onOpenQuote="openQuote" />
-
-      <!-- 3 Pillars from Flyer (ServicesHex) -->
       <ServicesHex />
-
-      <!-- Live GPS Telematics Simulator -->
       <LiveGpsSimulator />
-
-      <!-- Target Sectors in Mali -->
       <SectorsSection :onOpenQuote="openQuote" />
-
-      <!-- Advanced Features (Video surveillance, fuel sensor, SOS) -->
       <AdvancedFeatures />
-
-      <!-- ROI & Fuel Savings Calculator -->
       <RoiCalculator />
-
-      <!-- Testimonials & FAQs -->
       <Testimonials />
-
-      <!-- Contact & Quote Section with Flyer Coordinates -->
       <ContactQuote />
     </main>
 
-    <!-- Footer -->
+    <!-- Pied de page -->
     <Footer />
 
-    <!-- Modal Quote -->
+    <!-- Modale de devis -->
     <QuoteModal :isOpen="isQuoteModalOpen" @close="closeQuote" />
 
-    <!-- Floating Contact Actions (Bottom Right) -->
+    <!-- Boutons d'action flottants (Noir & Blanc ultra lisible) -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-      <!-- Call Button -->
+      <!-- Bouton Appel -->
       <a 
         :href="companyInfo.phones[0].link"
-        class="w-12 h-12 rounded-full bg-slate-900/90 border border-cyan-500/50 text-cyan-400 hover:text-white flex items-center justify-center shadow-xl shadow-cyan-950/60 hover:scale-110 transition-all group"
-        title="Appeler Central Track Mali (76 12 50 26)"
+        class="w-12 h-12 rounded-full bg-white border-2 border-black text-black hover:bg-black hover:text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all group"
+        title="Appeler Central Track Mali : 76 12 50 26"
       >
         <Phone class="w-5 h-5" />
-        <span class="absolute right-14 bg-slate-900 border border-slate-700 text-xs text-white px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-xl">
+        <span class="absolute right-14 bg-black text-white text-xs px-3 py-1.5 rounded border border-black opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap font-bold shadow-md">
           Appeler 76 12 50 26
         </span>
       </a>
 
-      <!-- WhatsApp Button -->
+      <!-- Bouton WhatsApp -->
       <a 
         :href="`https://wa.me/${companyInfo.whatsappNumber}?text=Bonjour%20Central%20Track%20Mali,%20je%20souhaite%20un%20devis`"
         target="_blank"
-        class="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center justify-center shadow-xl shadow-emerald-950/50 hover:scale-110 transition-all group"
-        title="Échanger sur WhatsApp"
+        class="w-14 h-14 rounded-full bg-black text-white hover:bg-neutral-800 flex items-center justify-center shadow-2xl hover:scale-105 transition-all group border-2 border-white"
+        title="Discuter sur WhatsApp"
       >
-        <span class="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-emerald-400 opacity-40"></span>
-        <MessageSquare class="w-6 h-6 text-slate-950" />
-        <span class="absolute right-16 bg-slate-900 border border-emerald-500/40 text-xs text-emerald-400 px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-xl font-bold">
+        <MessageSquare class="w-6 h-6" />
+        <span class="absolute right-16 bg-black text-white border border-neutral-700 text-xs px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap font-bold shadow-xl">
           Discuter sur WhatsApp
         </span>
       </a>

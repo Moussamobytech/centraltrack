@@ -4,9 +4,7 @@ import {
   ChevronDown, 
   HelpCircle, 
   Star, 
-  Quote, 
-  Building, 
-  CheckCircle2 
+  Quote
 } from 'lucide-vue-next'
 import { faqs } from '../data/content'
 
@@ -34,7 +32,7 @@ const clientReviews = [
   {
     company: "Entreprise BTP & Travaux Publics",
     location: "Chantiers Grand Bamako",
-    text: "Nous contrôlons désormais les heures réelles de fonctionnement de nos pelleteuses et groupes électrogènes. La coupure moteur à distance nous protège contre toute utilisation frauduleuse de nuit.",
+    text: "Nous contrôlons désormais les heures réelles de fonctionnement de nos pelleteuses. La coupure moteur à distance nous protège contre toute utilisation frauduleuse de nuit.",
     author: "Gestionnaire de Parc",
     rating: 5
   }
@@ -42,81 +40,81 @@ const clientReviews = [
 </script>
 
 <template>
-  <section class="py-20 bg-[#060B14] relative border-t border-slate-800">
+  <section class="py-20 bg-white border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Testimonials Header : Left-aligned 2-column layout -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-800/80 pb-6 text-left">
+      <!-- En-tête -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-black/10 pb-6 text-left">
         <div class="space-y-3 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-semibold text-cyan-400">
-            <Star class="w-3.5 h-3.5 fill-cyan-400" />
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 border border-neutral-300 text-xs font-bold text-black">
+            <Star class="w-3.5 h-3.5 fill-black text-black" />
             <span>RÉFÉRENCES & CONFIANCE</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight">
             La sérénité garantie pour les gestionnaires de parc
           </h2>
         </div>
-        <p class="text-slate-400 text-xs sm:text-sm max-w-md">
-          Découvrez les retours d'expérience d'entreprises, d'ONG et de transporteurs opérant quotidiennement sur les axes maliens.
+        <p class="text-neutral-700 text-sm font-medium max-w-md">
+          Découvrez les retours d'expérience d'entreprises, d'ONG et de transporteurs opérant sur les axes maliens.
         </p>
       </div>
 
-      <!-- Testimonials Grid -->
+      <!-- Grille des Avis Clients N&B -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-left">
         <div 
           v-for="(rev, idx) in clientReviews"
           :key="idx"
-          class="p-7 rounded-2xl bg-[#0A1424] border border-slate-800 flex flex-col justify-between space-y-4 relative"
+          class="p-7 rounded-2xl bg-white border-2 border-neutral-200 hover:border-black transition-all flex flex-col justify-between space-y-5 relative shadow-sm"
         >
-          <Quote class="w-8 h-8 text-cyan-500/30 absolute top-6 right-6" />
+          <Quote class="w-8 h-8 text-neutral-300 absolute top-6 right-6" />
           
           <div class="space-y-3">
-            <div class="flex items-center gap-1 text-amber-400">
-              <Star v-for="s in rev.rating" :key="s" class="w-4 h-4 fill-amber-400" />
+            <div class="flex items-center gap-1">
+              <Star v-for="s in rev.rating" :key="s" class="w-4 h-4 fill-black text-black" />
             </div>
-            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed italic">
+            <p class="text-neutral-800 text-sm leading-relaxed font-medium italic">
               "{{ rev.text }}"
             </p>
           </div>
 
-          <div class="pt-4 border-t border-slate-800">
-            <span class="font-bold text-white text-sm block">{{ rev.author }}</span>
-            <span class="text-cyan-400 text-xs font-medium block">{{ rev.company }}</span>
-            <span class="text-slate-400 text-[11px] block">{{ rev.location }}</span>
+          <div class="pt-4 border-t border-neutral-200">
+            <span class="font-black text-black text-sm block">{{ rev.author }}</span>
+            <span class="text-neutral-700 text-xs font-bold block">{{ rev.company }}</span>
+            <span class="text-neutral-500 text-[11px] font-semibold block">{{ rev.location }}</span>
           </div>
         </div>
       </div>
 
-      <!-- FAQ Section : Left-aligned -->
+      <!-- Foire Aux Questions (FAQ) -->
       <div class="max-w-4xl space-y-6 text-left">
         
-        <div class="space-y-2 border-b border-slate-800/80 pb-4">
-          <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-            <HelpCircle class="w-4 h-4" />
+        <div class="space-y-2 border-b border-black/10 pb-4">
+          <div class="inline-flex items-center gap-2 text-xs font-black text-black uppercase tracking-wider">
+            <HelpCircle class="w-4 h-4 text-black" />
             <span>Foire aux questions</span>
           </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-white">Questions fréquentes sur nos services de tracking</h3>
+          <h3 class="text-xl sm:text-2xl font-black text-black">Questions fréquentes sur nos services de tracking</h3>
         </div>
 
         <div class="space-y-3">
           <div 
             v-for="(faq, fIndex) in faqs" 
             :key="fIndex"
-            class="rounded-2xl border border-slate-800 bg-[#0A1424] overflow-hidden transition-all"
+            class="rounded-2xl border-2 border-neutral-200 bg-white overflow-hidden transition-all shadow-sm"
           >
             <button 
               @click="toggleFaq(fIndex)"
-              class="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-cyan-400 transition-colors cursor-pointer"
+              class="w-full p-5 text-left flex items-center justify-between gap-4 font-black text-sm sm:text-base text-black hover:bg-neutral-50 transition-colors cursor-pointer"
             >
               <span>{{ faq.q }}</span>
               <ChevronDown 
-                class="w-5 h-5 shrink-0 text-slate-400 transition-transform duration-300"
-                :class="{ 'rotate-180 text-cyan-400': openFaqIndex === fIndex }"
+                class="w-5 h-5 shrink-0 text-black transition-transform duration-200"
+                :class="{ 'rotate-180': openFaqIndex === fIndex }"
               />
             </button>
             <div 
               v-show="openFaqIndex === fIndex" 
-              class="px-5 pb-5 text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3"
+              class="px-5 pb-5 text-sm text-neutral-700 font-medium leading-relaxed border-t border-neutral-200 pt-3"
             >
               {{ faq.a }}
             </div>

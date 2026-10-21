@@ -8,22 +8,22 @@ export default {
     extend: {
       colors: {
         ctm: {
-          cyan: '#00D2FF',
-          teal: '#00F2FE',
-          green: '#10B981',
-          emerald: '#059669',
-          dark: '#070D19',
-          card: '#0D1829',
-          cardborder: '#1E293B',
-          muted: '#94A3B8'
+          black: '#000000',
+          dark: '#111111',
+          charcoal: '#1F2937',
+          gray: '#4B5563',
+          muted: '#6B7280',
+          lightgray: '#F3F4F6',
+          border: '#E5E7EB',
+          white: '#FFFFFF',
         }
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'glow-cyan': '0 0 25px -5px rgba(0, 210, 255, 0.3)',
-        'glow-green': '0 0 25px -5px rgba(16, 185, 129, 0.3)',
+        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
       }
     },
   },
