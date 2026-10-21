@@ -3,10 +3,8 @@ import { ref } from 'vue'
 import Navbar from './components/Navbar.vue'
 import HeroSection from './components/HeroSection.vue'
 import ServicesHex from './components/ServicesHex.vue'
-import LiveGpsSimulator from './components/LiveGpsSimulator.vue'
+import WhyChooseUs from './components/WhyChooseUs.vue'
 import SectorsSection from './components/SectorsSection.vue'
-import AdvancedFeatures from './components/AdvancedFeatures.vue'
-import RoiCalculator from './components/RoiCalculator.vue'
 import Testimonials from './components/Testimonials.vue'
 import ContactQuote from './components/ContactQuote.vue'
 import Footer from './components/Footer.vue'
@@ -28,30 +26,39 @@ const closeQuote = () => {
 <template>
   <div class="min-h-screen bg-white text-black flex flex-col font-sans selection:bg-black selection:text-white">
     
-    <!-- Barre de Navigation -->
+    <!-- Navigation épurée -->
     <Navbar :onOpenQuote="openQuote" />
 
-    <!-- Contenu Principal -->
+    <!-- Contenu Principal Essentiel -->
     <main class="flex-grow">
+      <!-- 1. En-tête / Accroche et coordonnées -->
       <HeroSection :onOpenQuote="openQuote" />
+
+      <!-- 2. Les 3 Solutions Phares du flyer CTM -->
       <ServicesHex />
-      <LiveGpsSimulator />
-      <SectorsSection :onOpenQuote="openQuote" />
-      <AdvancedFeatures />
-      <RoiCalculator />
+
+      <!-- 3. Pourquoi choisir CTM (Techniciens locaux, coupure moteur, anti-siphonnage) -->
+      <WhyChooseUs />
+
+      <!-- 4. Secteurs d'activité (Entreprises, Transporteurs, ONG, Particuliers) -->
+      <SectorsSection />
+
+      <!-- 5. FAQ et Engagements de service -->
       <Testimonials />
+
+      <!-- 6. Formulaire de contact & Devis express -->
       <ContactQuote />
     </main>
 
     <!-- Pied de page -->
     <Footer />
 
-    <!-- Modale de devis -->
+    <!-- Modale de devis express -->
     <QuoteModal :isOpen="isQuoteModalOpen" @close="closeQuote" />
 
-    <!-- Boutons d'action flottants (Noir & Blanc ultra lisible) -->
+    <!-- Boutons d'action flottants (Discrets & Efficaces) -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-      <!-- Bouton Appel -->
+      <!-- Appel -->
       <a 
         :href="companyInfo.phones[0].link"
         class="w-12 h-12 rounded-full bg-white border-2 border-black text-black hover:bg-black hover:text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all group"
@@ -63,7 +70,7 @@ const closeQuote = () => {
         </span>
       </a>
 
-      <!-- Bouton WhatsApp -->
+      <!-- WhatsApp -->
       <a 
         :href="`https://wa.me/${companyInfo.whatsappNumber}?text=Bonjour%20Central%20Track%20Mali,%20je%20souhaite%20un%20devis`"
         target="_blank"

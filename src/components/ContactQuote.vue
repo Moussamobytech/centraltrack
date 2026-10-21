@@ -5,8 +5,7 @@ import {
   Mail, 
   MapPin, 
   Clock, 
-  MessageSquare, 
-  CheckCircle
+  MessageSquare
 } from 'lucide-vue-next'
 import { companyInfo } from '../data/content'
 
@@ -14,38 +13,17 @@ const form = ref({
   name: '',
   phone: '',
   company: '',
-  sector: 'Entreprise & PME',
-  vehicleCount: 5,
-  services: ['Suivi GPS temps réel', 'Coupure moteur à distance'],
+  vehicleCount: '1 à 5 véhicules',
   message: ''
 })
 
-const availableServices = [
-  'Suivi GPS temps réel',
-  'Coupure moteur à distance',
-  'Gestion des chauffeurs & éco-conduite',
-  'Sonde carburant & anti-siphonnage',
-  'Vidéosurveillance embarquée (Dashcam IA)',
-  'Bouton SOS d\'urgence'
-]
-
-const toggleService = (srv) => {
-  if (form.value.services.includes(srv)) {
-    form.value.services = form.value.services.filter(s => s !== srv)
-  } else {
-    form.value.services.push(srv)
-  }
-}
-
 const sendViaWhatsApp = () => {
-  const text = `*NOUVELLE DEMANDE DE DEVIS CTM*%0A` +
+  const text = `*DEMANDE DE DEVIS CENTRAL TRACK MALI*%0A` +
     `👤 *Nom* : ${form.value.name || 'Non précisé'}%0A` +
-    `🏢 *Entreprise* : ${form.value.company || 'Particulier'}%0A` +
     `📞 *Téléphone* : ${form.value.phone || 'Non précisé'}%0A` +
-    `🏷️ *Secteur* : ${form.value.sector}%0A` +
-    `🚗 *Véhicules* : ${form.value.vehicleCount}%0A` +
-    `⚙️ *Modules* : ${form.value.services.join(', ')}%0A` +
-    `📝 *Message* : ${form.value.message || 'Demande de devis'}`
+    `🏢 *Société / Particulier* : ${form.value.company || 'Particulier'}%0A` +
+    `🚗 *Parc de véhicules* : ${form.value.vehicleCount}%0A` +
+    `📝 *Précisions* : ${form.value.message || 'Demande d\'information et tarif'}`
 
   window.open(`https://wa.me/${companyInfo.whatsappNumber}?text=${text}`, '_blank')
 }
@@ -53,51 +31,55 @@ const sendViaWhatsApp = () => {
 const sendViaEmail = () => {
   const subject = encodeURIComponent(`Demande de devis CTM - ${form.value.company || form.value.name}`)
   const body = encodeURIComponent(
-    `Nom: ${form.value.name}\nSociété: ${form.value.company}\nTéléphone: ${form.value.phone}\nSecteur: ${form.value.sector}\nNombre de véhicules: ${form.value.vehicleCount}\nServices: ${form.value.services.join(', ')}\n\nMessage:\n${form.value.message}`
+    `Nom: ${form.value.name}\n` +
+    `Téléphone: ${form.value.phone}\n` +
+    `Société/Particulier: ${form.value.company}\n` +
+    `Nombre de véhicules: ${form.value.vehicleCount}\n\n` +
+    `Message:\n${form.value.message}`
   )
   window.location.href = `mailto:${companyInfo.email}?subject=${subject}&body=${body}`
 }
 </script>
 
 <template>
-  <section id="contact" class="py-20 bg-white border-b border-black/10">
+  <section id="contact" class="py-16 md:py-20 bg-white border-b border-black/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- En-tête -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-black/10 pb-6 text-left">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-black/10 pb-8 text-left">
         <div class="space-y-3 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 border border-neutral-300 text-xs font-bold text-black">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 border border-neutral-300 text-xs font-black text-black">
             <MessageSquare class="w-3.5 h-3.5" />
-            <span>CONTACT & DEVIS EXPRESS</span>
+            <span>CONTACT & DEVIS RAPIDE</span>
           </div>
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-black tracking-tight">
-            Équipez vos véhicules avec Central Track Mali
+            Contactez notre équipe commerciale
           </h2>
         </div>
-        <p class="text-neutral-700 text-sm font-medium max-w-md">
-          Nos techniciens vous accueillent à notre agence de Banankabougou ou interviennent directement dans vos locaux à Bamako.
+        <p class="text-neutral-700 text-sm font-semibold max-w-md">
+          Nos techniciens vous accueillent à notre agence de Banankabougou ou interviennent directement dans vos locaux à Bamako sous 24h.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
         <!-- Coordonnées Agence (Gauche) -->
         <div class="lg:col-span-5 space-y-6 text-left">
           
-          <div class="p-8 rounded-3xl bg-white border-2 border-black space-y-6 shadow-sm">
-            <div class="border-b border-neutral-200 pb-5">
-              <span class="text-xs uppercase font-black text-black tracking-wider">SIÈGE SOCIAL</span>
+          <div class="p-8 rounded-3xl bg-neutral-50 border-2 border-black space-y-6 shadow-sm">
+            <div class="border-b border-neutral-300 pb-5">
+              <span class="text-xs uppercase font-black text-neutral-500 tracking-wider">SIÈGE SOCIAL</span>
               <h3 class="text-2xl font-black text-black mt-1">CENTRAL TRACK MALI</h3>
-              <p class="text-xs text-neutral-600 font-semibold mt-1">Tracking • Vidéosurveillance • Sécurité & Services</p>
+              <p class="text-xs text-neutral-700 font-bold mt-1">Tracking • Vidéosurveillance • Sécurité & Services</p>
             </div>
 
             <!-- Adresse -->
             <div class="flex items-start gap-4">
-              <div class="w-11 h-11 rounded-xl bg-neutral-100 border border-neutral-300 flex items-center justify-center text-black shrink-0">
+              <div class="w-11 h-11 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
                 <MapPin class="w-5 h-5" />
               </div>
               <div>
-                <span class="text-xs uppercase font-bold text-neutral-500 block">Adresse Agence</span>
+                <span class="text-xs uppercase font-bold text-neutral-500 block">Adresse de l'Agence</span>
                 <p class="text-black font-black text-sm sm:text-base mt-0.5">
                   BANANKABOUGOU PRÈS COUR SUPRÊME
                 </p>
@@ -107,7 +89,7 @@ const sendViaEmail = () => {
 
             <!-- Téléphones -->
             <div class="flex items-start gap-4">
-              <div class="w-11 h-11 rounded-xl bg-neutral-100 border border-neutral-300 flex items-center justify-center text-black shrink-0">
+              <div class="w-11 h-11 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
                 <Phone class="w-5 h-5" />
               </div>
               <div>
@@ -127,7 +109,7 @@ const sendViaEmail = () => {
 
             <!-- Email -->
             <div class="flex items-start gap-4">
-              <div class="w-11 h-11 rounded-xl bg-neutral-100 border border-neutral-300 flex items-center justify-center text-black shrink-0">
+              <div class="w-11 h-11 rounded-xl bg-black text-white flex items-center justify-center shrink-0">
                 <Mail class="w-5 h-5" />
               </div>
               <div>
@@ -139,11 +121,11 @@ const sendViaEmail = () => {
             </div>
 
             <!-- Horaires -->
-            <div class="flex items-start gap-4 pt-2 border-t border-neutral-200">
+            <div class="flex items-start gap-4 pt-2 border-t border-neutral-300">
               <Clock class="w-5 h-5 text-black shrink-0 mt-0.5" />
               <div class="text-xs text-neutral-700 font-medium">
                 <strong class="text-black font-bold">Horaires :</strong> Lun - Sam : 08h00 - 18h30 <br />
-                <span class="text-black font-bold">Permanence d'assistance d'urgence 24/7 pour nos abonnés</span>
+                <span class="text-black font-bold">Permanence d'assistance d'urgence 24/7 pour nos clients</span>
               </div>
             </div>
           </div>
@@ -152,16 +134,16 @@ const sendViaEmail = () => {
           <a 
             :href="`https://wa.me/${companyInfo.whatsappNumber}?text=Bonjour%20CTM,%20je%20souhaite%20des%20renseignements%20sur%20vos%20tarifs`"
             target="_blank"
-            class="p-5 rounded-2xl bg-black hover:bg-neutral-800 text-white flex items-center justify-between gap-4 font-bold transition-all shadow-md cursor-pointer"
+            class="p-5 rounded-2xl bg-black hover:bg-neutral-800 text-white flex items-center justify-between gap-4 font-bold transition-all shadow cursor-pointer"
           >
             <div class="flex items-center gap-3">
               <MessageSquare class="w-6 h-6 text-white" />
               <div>
                 <span class="text-sm font-black block">Échange instantané sur WhatsApp</span>
-                <span class="text-xs text-neutral-300 font-medium">Réponse de nos conseillers en moins de 15 min</span>
+                <span class="text-xs text-neutral-300 font-medium">Réponse en moins de 15 minutes</span>
               </div>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-white text-black font-black text-xs">Ouvrir</span>
+            <span class="px-3.5 py-1.5 rounded-lg bg-white text-black font-black text-xs">Ouvrir</span>
           </a>
 
         </div>
@@ -170,12 +152,12 @@ const sendViaEmail = () => {
         <div class="lg:col-span-7">
           <div class="p-8 sm:p-10 rounded-3xl bg-white border-2 border-black shadow-sm text-left">
             
-            <h3 class="text-2xl font-black text-black mb-2">Configurateur de Devis Personnalisé</h3>
+            <h3 class="text-2xl font-black text-black mb-2">Demande de Devis Express</h3>
             <p class="text-xs sm:text-sm text-neutral-600 font-medium mb-6">
-              Sélectionnez vos besoins et transmettez votre demande en 1 clic à notre équipe commerciale.
+              Remplissez ce formulaire pour recevoir une proposition adaptée à votre besoin sous 30 minutes.
             </p>
 
-            <form @submit.prevent="sendViaWhatsApp" class="space-y-5">
+            <form @submit.prevent="sendViaWhatsApp" class="space-y-4">
               
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -186,14 +168,14 @@ const sendViaEmail = () => {
                     type="text" 
                     required 
                     v-model="form.name"
-                    placeholder="Ex: Amadou Diallo"
+                    placeholder="Votre nom"
                     class="w-full px-4 py-3 rounded-xl bg-neutral-50 border-2 border-neutral-300 text-black placeholder-neutral-400 text-sm font-semibold focus:border-black focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
                   <label class="block text-xs font-black text-black uppercase tracking-wider mb-1.5">
-                    Numéro de Téléphone *
+                    Téléphone (Orange / Malitel) *
                   </label>
                   <input 
                     type="tel" 
@@ -208,87 +190,51 @@ const sendViaEmail = () => {
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-black text-black uppercase tracking-wider mb-1.5">
-                    Entreprise / Organisation
+                    Société ou Statut
                   </label>
                   <input 
                     type="text" 
                     v-model="form.company"
-                    placeholder="Ex: Société de Transport"
+                    placeholder="Nom de l'entreprise ou Particulier"
                     class="w-full px-4 py-3 rounded-xl bg-neutral-50 border-2 border-neutral-300 text-black placeholder-neutral-400 text-sm font-semibold focus:border-black focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
                   <label class="block text-xs font-black text-black uppercase tracking-wider mb-1.5">
-                    Secteur d'activité
+                    Nombre de véhicules
                   </label>
                   <select 
-                    v-model="form.sector"
+                    v-model="form.vehicleCount"
                     class="w-full px-4 py-3 rounded-xl bg-neutral-50 border-2 border-neutral-300 text-black text-sm font-bold focus:border-black focus:outline-none transition-colors"
                   >
-                    <option>Entreprise & PME</option>
-                    <option>ONG & Bailleurs</option>
-                    <option>Transport & Logistique</option>
-                    <option>BTP, Mines & Carrières</option>
-                    <option>Particulier (Véhicule personnel)</option>
+                    <option>1 véhicule (Particulier / VIP)</option>
+                    <option>2 à 5 véhicules</option>
+                    <option>6 à 15 véhicules</option>
+                    <option>16 à 50 véhicules</option>
+                    <option>Plus de 50 véhicules / Engins</option>
                   </select>
                 </div>
               </div>
 
-              <!-- Nombre de véhicules -->
+              <!-- Message -->
               <div>
                 <label class="block text-xs font-black text-black uppercase tracking-wider mb-1.5">
-                  Nombre de véhicules à équiper : <span class="font-mono underline">{{ form.vehicleCount }}</span>
-                </label>
-                <input 
-                  type="range" 
-                  min="1" 
-                  max="50" 
-                  v-model.number="form.vehicleCount"
-                  class="w-full h-2.5 bg-neutral-200 rounded-lg appearance-none cursor-pointer accent-black"
-                />
-              </div>
-
-              <!-- Choix des services -->
-              <div>
-                <label class="block text-xs font-black text-black uppercase tracking-wider mb-2">
-                  Fonctionnalités souhaitées :
-                </label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <button 
-                    type="button"
-                    v-for="srv in availableServices"
-                    :key="srv"
-                    @click="toggleService(srv)"
-                    class="px-3.5 py-2.5 rounded-lg text-xs font-bold text-left border-2 flex items-center justify-between transition-all cursor-pointer"
-                    :class="form.services.includes(srv)
-                      ? 'bg-black text-white border-black'
-                      : 'bg-white border-neutral-200 text-neutral-800 hover:border-black'"
-                  >
-                    <span class="truncate">{{ srv }}</span>
-                    <CheckCircle v-if="form.services.includes(srv)" class="w-4 h-4 text-white shrink-0 ml-1" />
-                  </button>
-                </div>
-              </div>
-
-              <!-- Précisions -->
-              <div>
-                <label class="block text-xs font-black text-black uppercase tracking-wider mb-1.5">
-                  Précisions complémentaires (Optionnel)
+                  Votre besoin (Optionnel)
                 </label>
                 <textarea 
-                  rows="2"
+                  rows="3"
                   v-model="form.message"
-                  placeholder="Ex: Véhicules situés à Bamako et Sikasso, besoin d'une installation urgente..."
+                  placeholder="Ex: Suivi GPS, coupure moteur, sonde carburant, installation à Bamako..."
                   class="w-full px-4 py-3 rounded-xl bg-neutral-50 border-2 border-neutral-300 text-black placeholder-neutral-400 text-sm font-semibold focus:border-black focus:outline-none transition-colors"
                 ></textarea>
               </div>
 
-              <!-- Boutons de soumission -->
+              <!-- Boutons d'envoi -->
               <div class="pt-2 flex flex-col sm:flex-row gap-3">
                 <button 
                   type="submit"
-                  class="flex-1 py-4 px-6 rounded-xl bg-black hover:bg-neutral-800 text-white font-black text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
+                  class="flex-1 py-4 px-6 rounded-xl bg-black hover:bg-neutral-800 text-white font-black text-sm flex items-center justify-center gap-2 transition-all shadow cursor-pointer"
                 >
                   <MessageSquare class="w-4 h-4" />
                   <span>Envoyer ma demande par WhatsApp</span>
